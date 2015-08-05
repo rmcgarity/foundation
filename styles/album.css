@@ -51,11 +51,16 @@ body.album {
 }
 
 .song-item-title {
-    width: 85%;
+    width: 80%;
 }
 
 .song-item-duration {
+    width: 10%;
+}
+
+.song-item-repeats {
     width: 5%;
+    text-align: center
 }
 
 /* #2 */
