@@ -60,7 +60,11 @@ body.album {
 
 .song-item-repeats {
     width: 5%;
-    text-align: center
+    text-align: center;
+}
+
+th {
+    text-align: left;
 }
 
 /* #2 */
