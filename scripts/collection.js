@@ -26,7 +26,11 @@ window.onload = function() {
     // #1
     //var collectionContainer = document.getElementsByName('ralph')[0].childNodes[1];
     var collectionContainer = document.getElementsByClassName('album-covers')[0].childNodes[1];
-    getAllProperties(collectionContainer);
+    
+    // # 2
+    collectionContainer.innerHTML = '';
+    
+    // getAllProperties(collectionContainer);
     // #3
     for (var i = 0; i < 12; i++) {
        collectionContainer.innerHTML += collectionItemTemplate;
