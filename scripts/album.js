@@ -30,6 +30,24 @@ var albumMarconi = {
     ]
 };
 
+// Ralph's Album
+var albumCharlesTrenet = {
+    name: 'Le Tour De Chant De Charles Trenet',
+    artist: 'Charles Trenet',
+    label: 'Columbia',
+    year: '1956',
+    albumArtUrl: 'assets/images/album_covers/Charles-Trenet.jpg',
+    songs: [
+        { name: 'En Attendant Ma Belle', length: '5:02' },
+        { name: 'La Petite Musique', length: '5:01' },
+        { name: 'L\'Ane Et Le Gendarme', length: '3:50'},
+        { name: 'La Java Du Diable', length: '4:14' },
+        { name: 'J\'ai Mordu Dans Le Fruit', length: '2:15'}
+    ]
+};
+
+var albumChoices = [albumPicasso, albumMarconi, albumCharlesTrenet];
+
 var createSongRow = function(songNumber, songName, songLength) {
     
     var template =
@@ -42,14 +60,16 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 var setCurrentAlbum = function(album) {
 
     // #1
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 
     // #2
     albumTitle.firstChild.nodeValue = album.name;
@@ -66,8 +86,13 @@ var setCurrentAlbum = function(album) {
     }
 };
 
+var count = 1;
+var chooseAndDisplayAlbumCover = function() {
+    setCurrentAlbum(albumChoices[count % 3]);
+    count++;
+}
+
 window.onload = function() {
-  
-    setCurrentAlbum(albumPicasso);
-    
+    setCurrentAlbum(albumChoices[0]);
+    albumImage.addEventListener("click", chooseAndDisplayAlbumCover);
 };
