@@ -25,8 +25,8 @@ var createSongRow = function(songNumber, songName, songLength) {
             $(this).html(pauseButtonTemplate);
             setSong(thisSongNumber);
             currentSoundFile.play();
-            updateSeekBarWhileSongPlays();
             updatePlayerBarSong();
+            updateSeekBarWhileSongPlays();
         } else if (currentlyPlayingSongNumber === thisSongNumber) {
             if (currentSoundFile.isPaused()) {
                 currentSoundFile.play();
@@ -83,11 +83,15 @@ var setCurrentAlbum = function(album) {
     }
 };
 var updateSeekBarWhileSongPlays = function() {
+    var setCurrentTimeInPlayerBar = function(currentTime) {
+        $('.current-time').text(currentTime);
+    }
     if (currentSoundFile) {
         currentSoundFile.bind('timeupdate', function(event) {
             var seekBarFillRatio = this.getTime() / this.getDuration();
             var $seekBar = $('.seek-control .seek-bar');
             updateSeekPercentage($seekBar, seekBarFillRatio);
+            setCurrentTimeInPlayerBar(filterTimeCode(currentSoundFile.getTime()));
         });
     }
  
@@ -139,11 +143,24 @@ var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
 }
 
+var filterTimeCode = function(timeInSeconds) {
+    var totalSeconds = parseFloat(timeInSeconds);
+    var minutes = Math.floor(totalSeconds/60);
+    var residualSeconds = Math.ceil(totalSeconds - minutes*60);
+    return(minutes + ":" + ("0" + residualSeconds).slice(-2));
+}
 var updatePlayerBarSong = function() {
+    var setTotalTimeInPlayerBar = function(totalTime) {
+        $('.total-time').text(totalTime);
+    }
     $('.currently-playing .song-name').text(currentSongFromAlbum.name);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.name + " - " + currentAlbum.artist);
     $('.left-controls .play-pause').html(playerBarPauseButton);
+    var totalSongTime;
+    currentSoundFile.bind("loadeddata", function(e) {
+        setTotalTimeInPlayerBar(filterTimeCode(currentSoundFile.getDuration()));
+    });
 }
 
 var setSong = function(songNumber) {
@@ -186,6 +203,7 @@ var nextPrevSongClickHandler = function(direction) {
     // Set a new current song
     setSong(currentSongIndex+1);
     currentSoundFile.play();
+    updatePlayerBarSong();
     updateSeekBarWhileSongPlays();
 
     // Update the Player Bar information
