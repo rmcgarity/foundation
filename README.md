@@ -1,7 +1,7 @@
 # Foundation
 A digital music player, like Spotify. Written in javascript, then refactored in JQuery. Uses the [Buzz!](http://buzz.jaysalvat.com) audio API library.
 
-####Example Screenshot:
+####Example Screenshot
 ![Bloc Jams](https://github.com/rmcgarity/foundation/blob/master/assets/images/Bloc-Jams-Foundation%20Screen%20Shot.JPG "Bloc-Jams")
 
 ####Features
@@ -13,13 +13,14 @@ A digital music player, like Spotify. Written in javascript, then refactored in 
 * Adjust volume
 * Auto-adjusts view for different window sizes
 
-####Note: I subsequently refactored with Angular and added more features, [here](www.yahoo.com).
+####Note
+I subsequently refactored with Angular in my later [bloc-jams-angular](https://github.com/rmcgarity/bloc-jams-angular) project.
 
 ####Installation
 ```
 git clone https://github.com/rmcgarity/bloc-jams-angular.git
 ```
 
-####Contact:
+####Contact
 * ralph_mcgarity@yahoo.com
 
